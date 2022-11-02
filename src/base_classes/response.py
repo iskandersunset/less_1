@@ -4,6 +4,7 @@ from src.enums.global_enums import GlobalErrorMessages
 
 
 class Response:
+    """ Base methods."""
 
     def __init__(self, response):
         self.response = response
@@ -11,6 +12,8 @@ class Response:
         self.response_status = response.status_code
 
     def validate(self, schema):
+        """ Validating schema json."""
+
         if isinstance(self.response_json, list):
             for item in self.response_json:
                 validate(item, schema)
@@ -20,6 +23,8 @@ class Response:
             print("Schema - VALID!")
 
     def assert_status_code(self, status_code):
+        """Assertion response status code."""
+
         if isinstance(status_code, list):
             assert self.response_status in status_code, GlobalErrorMessages.WRONG_STATUS_CODE.value
             print("Response STATUS - GOOD!")
