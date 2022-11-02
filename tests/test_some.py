@@ -8,7 +8,7 @@ from src.pydantic_scheme.post import Post
 
 
 def test_getting_posts():
-    response = requests.get(url=SERVICE_URL)
+    response = requests.get(SERVICE_URL)
     response = Response(response)
 
     response.assert_status_code(200).validate(Post)
