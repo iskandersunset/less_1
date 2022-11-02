@@ -1,4 +1,4 @@
-from jsonschema import validate
+# from jsonschema import validate
 
 from src.enums.global_enums import GlobalErrorMessages
 
@@ -14,6 +14,13 @@ class Response:
     def validate(self, schema):
         """ Validating schema json."""
 
+        if isinstance(self.response_json, list):  # Без pydantic
+            for item in self.response_json:
+                schema.parse_obj(item)
+        else:
+            schema.parse_obj(self.response_json)
+        return self
+
         # if isinstance(self.response_json, list):  # Без pydantic
         #     for item in self.response_json:
         #         validate(item, schema)
@@ -27,8 +34,6 @@ class Response:
 
         if isinstance(status_code, list):
             assert self.response_status in status_code, GlobalErrorMessages.WRONG_STATUS_CODE.value
-            print("Response STATUS - GOOD!")
         else:
             assert self.response_status == status_code, GlobalErrorMessages.WRONG_STATUS_CODE.value
-            print("Response STATUS - GOOD!")
         return self
