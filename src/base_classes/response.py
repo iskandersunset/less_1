@@ -14,13 +14,13 @@ class Response:
     def validate(self, schema):
         """ Validating schema json."""
 
-        if isinstance(self.response_json, list):
-            for item in self.response_json:
-                validate(item, schema)
-                print("Schema - VALID!")
-        else:
-            validate(self.response_json, schema)
-            print("Schema - VALID!")
+        # if isinstance(self.response_json, list):  # Без pydantic
+        #     for item in self.response_json:
+        #         validate(item, schema)
+        #         print("Schema - VALID!")
+        # else:
+        #     validate(self.response_json, schema)
+        #     print("Schema - VALID!")
 
     def assert_status_code(self, status_code):
         """Assertion response status code."""
